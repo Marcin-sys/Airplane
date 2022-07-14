@@ -18,4 +18,19 @@ public class StudentDAO {
             session.close();
         }
     }
+    public void update(Student student){
+        HibernateFactory hibernateFactory = new HibernateFactory();
+        Session session = hibernateFactory.sessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        try{
+            session.update(student);
+            session.getTransaction().commit();
+        }catch (Exception ex){
+            transaction.rollback();
+            ex.printStackTrace();
+            throw new RuntimeException();
+        }finally {
+            session.close();
+        }
+    }
 }

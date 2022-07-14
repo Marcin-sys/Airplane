@@ -18,5 +18,11 @@ public class App {
 
         departmentDAO.add(department);
         studentDAO.add(student);
+
+        student.setId(1);
+        student.setName("updated student");
+        student.setSkin("black");
+
+        studentDAO.update(student);
     }
 }
