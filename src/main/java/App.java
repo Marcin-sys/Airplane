@@ -3,7 +3,8 @@ import entity.Student;
 
 public class App {
     public static void main(String[] args) {
-        AirplanesDAO airplanesDAO = new AirplanesDAO();
+        DepartmentDAO departmentDAO = new DepartmentDAO();
+        StudentDAO studentDAO = new StudentDAO();
         Department department = new Department();
         Student student = new Student();
 
@@ -15,6 +16,7 @@ public class App {
         student.setName("Popolupo");
         student.setSkin("white");
 
-        airplanesDAO.add(department,student);
+        departmentDAO.add(department);
+        studentDAO.add(student);
     }
 }
