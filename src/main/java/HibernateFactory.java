@@ -10,10 +10,11 @@ public class HibernateFactory {
                 .addAnnotatedClass(Department.class).addAnnotatedClass(Student.class);
         return configuration;
     }
-    public SessionFactory sessionFactory(){
+
+    public SessionFactory sessionFactory() {
         StandardServiceRegistryBuilder registryBuilder = new StandardServiceRegistryBuilder()
                 .applySettings(getHibernateConfiguration().getProperties());
         return getHibernateConfiguration().buildSessionFactory(registryBuilder.build());
     }
 
-    }
+}

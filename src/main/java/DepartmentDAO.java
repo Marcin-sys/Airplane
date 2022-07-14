@@ -1,5 +1,4 @@
 import entity.Department;
-import entity.Student;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
