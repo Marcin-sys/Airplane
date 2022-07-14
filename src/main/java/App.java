@@ -24,8 +24,8 @@ public class App {
         student.setSkin("black");
 
         studentDAO.update(student);
-        System.out.println("tutaj jestesmy");
 
-
+        departmentDAO.read(1);
+        studentDAO.read(2);
     }
 }
