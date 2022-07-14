@@ -60,7 +60,8 @@ public class StudentDAO {
             studentObj = session.get(Student.class, studentId);
             if (studentObj != null) {
                 System.out.println("Student id = " + studentId + " ,student name = " + studentObj.getName() +
-                        " ,student skin = " + studentObj.getSkin() + " ,student department id = ");
+                        " ,student skin = " + studentObj.getSkin() + " ,student department id = "
+                        + studentObj.getDepartment().getId());
             } else {
                 System.out.println((Object) null);
             }

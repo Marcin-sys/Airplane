@@ -8,13 +8,13 @@ public class App {
         Department department = new Department();
         Student student = new Student();
 
-        department.setId(15);
         department.setColor("green");
         department.setName("Jumbojet");
 
         student.setId(10);
         student.setName("Popolupo");
         student.setSkin("white");
+        student.setDepartment(department);
 
         departmentDAO.add(department);
         studentDAO.add(student);
@@ -26,6 +26,6 @@ public class App {
         studentDAO.update(student);
 
         departmentDAO.read(1);
-        studentDAO.read(2);
+        studentDAO.read(20);
     }
 }
