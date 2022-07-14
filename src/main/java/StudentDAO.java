@@ -33,4 +33,19 @@ public class StudentDAO {
             session.close();
         }
     }
+    public void delete(Student student){
+        HibernateFactory hibernateFactory = new HibernateFactory();
+        Session session = hibernateFactory.sessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        try{
+            session.delete(student);
+            session.getTransaction().commit();
+        }catch (Exception ex){
+            transaction.rollback();
+            ex.printStackTrace();
+            throw new RuntimeException();
+        }finally {
+            session.close();
+        }
+    }
 }

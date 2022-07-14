@@ -24,5 +24,8 @@ public class App {
         student.setSkin("black");
 
         studentDAO.update(student);
+        System.out.println("tutaj jestesmy");
+
+
     }
 }
