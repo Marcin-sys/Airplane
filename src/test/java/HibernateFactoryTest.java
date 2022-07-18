@@ -1,15 +1,14 @@
 import entity.Department;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.*;
 import org.junit.jupiter.api.*;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class HibernateFactoryTest {
-
-    @Test
-    void sessionFactory() {
-    }
 
     private static SessionFactory sessionFactory;
     private Session session;
@@ -62,10 +61,24 @@ class HibernateFactoryTest {
 
     @Test
     public void testGet() {
+        System.out.println("Running testGet...");
+
+        Integer id = 1;
+
+        Department department = session.find(Department.class, id);
+
+        assertEquals("Human", department.getName());
+
     }
 
     @Test
     public void testList() {
+        System.out.println("Running testList...");
+
+        Query<Department> query = session.createQuery("from Department", Department.class);
+        List<Department> resultList = query.getResultList();
+
+        Assertions.assertFalse(resultList.isEmpty());
     }
 
     @Test
@@ -82,5 +95,6 @@ class HibernateFactoryTest {
     public void closeSession() {
         if (session != null) session.close();
         System.out.println("Session closed\n");
+
     }
 }
