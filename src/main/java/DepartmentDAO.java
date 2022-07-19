@@ -21,12 +21,13 @@ public class DepartmentDAO {
         }
     }
 
-    public void update(Department department) {
+    public void update(Department department,Integer id) {
         HibernateFactory hibernateFactory = new HibernateFactory();
         Session session = hibernateFactory.sessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
+        department.setId(id);
         try {
-            session.update(department);
+            session.merge(department);
             session.getTransaction().commit();
         } catch (Exception ex) {
             transaction.rollback();
@@ -72,5 +73,19 @@ public class DepartmentDAO {
         } finally {
             session.close();
         }
+    }
+
+    public Department get(Integer departmentId) {
+        HibernateFactory hibernateFactory = new HibernateFactory();
+        Session session = hibernateFactory.sessionFactory().openSession();
+        Department departmentObj;
+        try {
+            departmentObj = session.get(Department.class, departmentId);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new RuntimeException();
+        } finally {
+            session.close();
+        }return departmentObj;
     }
 }

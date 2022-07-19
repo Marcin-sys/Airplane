@@ -7,7 +7,7 @@ import org.hibernate.cfg.Configuration;
 public class HibernateFactory {
 
     private Configuration getHibernateConfiguration() {
-        Configuration configuration = new Configuration().configure()
+        final Configuration configuration = new Configuration().configure()
                 .addAnnotatedClass(Department.class).addAnnotatedClass(Student.class);
         return configuration;
     }

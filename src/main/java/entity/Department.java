@@ -1,9 +1,9 @@
 package entity;
 
 import jakarta.persistence.*;
+import jdk.jfr.DataAmount;
 
 import java.util.List;
-
 
 @Entity
 @Table(name = "departments")

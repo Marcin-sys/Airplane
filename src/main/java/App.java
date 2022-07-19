@@ -11,7 +11,6 @@ public class App {
         department.setColor("green");
         department.setName("Jumbojet");
 
-        student.setId(10);
         student.setName("Popolupo");
         student.setSkin("white");
         student.setDepartment(department);
@@ -19,11 +18,11 @@ public class App {
         departmentDAO.add(department);
         studentDAO.add(student);
 
-        student.setId(1);
-        student.setName("updated student");
-        student.setSkin("black");
+        department.setName("updated student");
+        department.setColor("black");
 
         studentDAO.update(student);
+        departmentDAO.update(department,3);
 
         departmentDAO.read(1);
         studentDAO.read(20);
