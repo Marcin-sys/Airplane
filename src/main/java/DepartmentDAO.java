@@ -38,13 +38,17 @@ public class DepartmentDAO {
         }
     }
 
-    public void delete(Department department) {
+    public void delete(Integer id) {
         HibernateFactory hibernateFactory = new HibernateFactory();
         Session session = hibernateFactory.sessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
+
         try {
-            session.delete(department);
-            session.getTransaction().commit();
+            Department departmentToDelete = session.find(Department.class,id);
+            if (departmentToDelete != null){
+                session.delete(departmentToDelete);
+                session.getTransaction().commit();
+            }
         } catch (Exception ex) {
             transaction.rollback();
             ex.printStackTrace();
