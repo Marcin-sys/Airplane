@@ -38,13 +38,13 @@ public class DepartmentDAO {
         }
     }
 
-    public void delete(Integer id) {
+    public void delete(Integer departmentId) {
         HibernateFactory hibernateFactory = new HibernateFactory();
         Session session = hibernateFactory.sessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
 
         try {
-            Department departmentToDelete = session.find(Department.class,id);
+            Department departmentToDelete = session.find(Department.class,departmentId);
             if (departmentToDelete != null){
                 session.delete(departmentToDelete);
                 session.getTransaction().commit();
@@ -58,16 +58,18 @@ public class DepartmentDAO {
         }
     }
 
-    public void read(Integer departmentId) {
+    public String read(Integer departmentId) {
         HibernateFactory hibernateFactory = new HibernateFactory();
         Session session = hibernateFactory.sessionFactory().openSession();
         Department departmentObj;
+        String information = null;
 
         try {
             departmentObj = session.get(Department.class, departmentId);
             if (departmentObj != null) {
-                System.out.println("Department id = " + departmentId + " ,department color = " + departmentObj.getColor() +
-                        " ,department name = " + departmentObj.getName());
+                information = "Department id = " + departmentId +
+                        " ,department color = " + departmentObj.getColor() +
+                        " ,department name = " + departmentObj.getName();
             } else {
                 System.out.println((Object) null);
             }
@@ -76,7 +78,7 @@ public class DepartmentDAO {
             throw new RuntimeException();
         } finally {
             session.close();
-        }
+        }return information;
     }
 
     public Department get(Integer departmentId) {
