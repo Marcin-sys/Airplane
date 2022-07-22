@@ -6,12 +6,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DepartmentDAOTest {
 
-    private DepartmentDAO departmentDAO;
-    private Department department;
+    Department department = new Department();
+    DepartmentDAO departmentDAO = new DepartmentDAO();
 
     @Test
     void add() {
-
         department.setId(1);
         department.setName("Physic");
         department.setColor("White");
@@ -23,16 +22,12 @@ class DepartmentDAOTest {
 
     @Test
     void get(){
-        DepartmentDAO departmentDAO = new DepartmentDAO();
-        Department department = departmentDAO.get(1);
+        department = departmentDAO.get(1);
         Assertions.assertTrue(department.getId()>0);
-        System.out.println("imie"+ department.getName());
     }
 
     @Test
     void update() {
-        DepartmentDAO departmentDAO = new DepartmentDAO();
-        Department department = new Department();
 
         department.setName("UpdateTestName");
         Integer id = 1;
@@ -41,14 +36,11 @@ class DepartmentDAOTest {
 
         Department department1 = department;
 
-
         assertSame("UpdateTestName", department1.getName());
     }
 
     @Test
     void delete() {
-        DepartmentDAO departmentDAO = new DepartmentDAO();
-        Department department = new Department();
 
         department.setId(1);
 

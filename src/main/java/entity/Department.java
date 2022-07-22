@@ -1,13 +1,13 @@
 package entity;
 
 import jakarta.persistence.*;
-import jdk.jfr.DataAmount;
 
 import java.util.List;
 
 @Entity
 @Table(name = "departments")
 public class Department {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -40,5 +40,6 @@ public class Department {
     public void setName(String name) {
         this.name = name;
     }
+
 
 }
