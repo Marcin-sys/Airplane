@@ -17,16 +17,16 @@ public class App {
         student.setSkin("white");
         student.setDepartment(department);
 
-        departmentDAO.add(department,hibernateFactory);
+        departmentDAO.add(department, hibernateFactory);
         studentDAO.add(student);
 
         department.setName("updated student");
         department.setColor("black");
 
         studentDAO.update(student);
-        departmentDAO.update(department,hibernateFactory,3);
+        departmentDAO.update(department, hibernateFactory, 3);
 
-        departmentDAO.read(hibernateFactory,1);
+        departmentDAO.read(hibernateFactory, 1);
         studentDAO.read(20);
     }
 }
