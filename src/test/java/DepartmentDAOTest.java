@@ -31,7 +31,7 @@ class DepartmentDAOTest {
         department.setName("Physic");
         department.setColor("White");
 
-        departmentDAO.add(department,hibernateFactory);
+        departmentDAO.add(department, hibernateFactory);
 
         Assertions.assertTrue(department.getId() > 0);
     }
@@ -43,7 +43,7 @@ class DepartmentDAOTest {
         session.beginTransaction();
         session.merge(department);
         session.getTransaction().commit();
-        department = departmentDAO.get(hibernateFactory,id);
+        department = departmentDAO.get(hibernateFactory, id);
         Assertions.assertTrue(department.getId() > 0);
         session.close();
     }
@@ -53,7 +53,7 @@ class DepartmentDAOTest {
     void update() {
         department.setId(id);
         department.setName("UpdateTestName");
-        departmentDAO.update(department,hibernateFactory, id);
+        departmentDAO.update(department, hibernateFactory, id);
 
         Department department1 = department;
 
@@ -66,13 +66,13 @@ class DepartmentDAOTest {
         department.setId(1);
         department.setName("ReadTestName");
         department.setColor("ReadTestColor");
-        departmentDAO.update(department,hibernateFactory,id);
+        departmentDAO.update(department, hibernateFactory, id);
 
-        String departmentInformation = departmentDAO.read(hibernateFactory,id);
+        String departmentInformation = departmentDAO.read(hibernateFactory, id);
         String result = "Department id = 1 ,department color = " +
                 "ReadTestColor ,department name = ReadTestName";
 
-        assertEquals(result,departmentInformation);
+        assertEquals(result, departmentInformation);
     }
 
     @Test
@@ -81,18 +81,18 @@ class DepartmentDAOTest {
         department.setId(id);
         department.setName("ReadTestName");
         department.setColor("ReadTestColor");
-        departmentDAO.add(department,hibernateFactory);
+        departmentDAO.add(department, hibernateFactory);
 
         Session session = hibernateFactory.sessionFactory().openSession();
-        departmentDAO.delete(hibernateFactory,id);
+        departmentDAO.delete(hibernateFactory, id);
 
         Department deletedDepartment = session.find(Department.class, id);
 
         Assertions.assertNull(deletedDepartment);
     }
+
     @AfterEach
     public void deleteDataBase() {
-        //Delete data from database
         Session session = hibernateFactory.sessionFactory().openSession();
         department.setId(id);
         session.beginTransaction();
