@@ -3,8 +3,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class StudentDAO {
-    public void add(Student student) {
-        HibernateFactory hibernateFactory = new HibernateFactory();
+    public void add(Student student,HibernateFactory hibernateFactory) {
         Session session = hibernateFactory.sessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         try {
@@ -19,12 +18,12 @@ public class StudentDAO {
         }
     }
 
-    public void update(Student student) {
-        HibernateFactory hibernateFactory = new HibernateFactory();
+    public void update(Student student,HibernateFactory hibernateFactory,Integer id) {
         Session session = hibernateFactory.sessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
+        student.setId(id);
         try {
-            session.update(student);
+            session.merge(student);
             session.getTransaction().commit();
         } catch (Exception ex) {
             transaction.rollback();
@@ -35,8 +34,7 @@ public class StudentDAO {
         }
     }
 
-    public void delete(Student student) {
-        HibernateFactory hibernateFactory = new HibernateFactory();
+    public void delete(Student student,HibernateFactory hibernateFactory) {
         Session session = hibernateFactory.sessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         try {
@@ -51,8 +49,7 @@ public class StudentDAO {
         }
     }
 
-    public void read(Integer studentId) {
-        HibernateFactory hibernateFactory = new HibernateFactory();
+    public void read(HibernateFactory hibernateFactory,Integer studentId) {
         Session session = hibernateFactory.sessionFactory().openSession();
         Student studentObj;
 

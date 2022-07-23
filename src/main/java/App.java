@@ -10,6 +10,7 @@ public class App {
         Department department = new Department();
         Student student = new Student();
 
+
         department.setColor("green");
         department.setName("Jumbojet");
 
@@ -18,15 +19,15 @@ public class App {
         student.setDepartment(department);
 
         departmentDAO.add(department, hibernateFactory);
-        studentDAO.add(student);
+        studentDAO.add(student, hibernateFactory);
 
         department.setName("updated student");
         department.setColor("black");
 
-        studentDAO.update(student);
+        studentDAO.update(student, hibernateFactory,1);
         departmentDAO.update(department, hibernateFactory, 3);
 
         departmentDAO.read(hibernateFactory, 1);
-        studentDAO.read(20);
+        studentDAO.read(hibernateFactory,20);
     }
 }
