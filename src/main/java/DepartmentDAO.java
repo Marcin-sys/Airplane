@@ -4,8 +4,7 @@ import org.hibernate.Transaction;
 
 
 public class DepartmentDAO {
-    public void add(Department department) {
-        HibernateFactory hibernateFactory = new HibernateFactory();
+    public void add(Department department,HibernateFactory hibernateFactory) {
         Session session = hibernateFactory.sessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
 

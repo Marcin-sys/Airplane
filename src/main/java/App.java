@@ -1,8 +1,10 @@
 import entity.Department;
 import entity.Student;
 
+
 public class App {
     public static void main(String[] args) {
+        HibernateFactory hibernateFactory = new HibernateFactory();
         DepartmentDAO departmentDAO = new DepartmentDAO();
         StudentDAO studentDAO = new StudentDAO();
         Department department = new Department();
@@ -15,7 +17,7 @@ public class App {
         student.setSkin("white");
         student.setDepartment(department);
 
-        departmentDAO.add(department);
+        departmentDAO.add(department,hibernateFactory);
         studentDAO.add(student);
 
         department.setName("updated student");

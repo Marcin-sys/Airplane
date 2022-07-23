@@ -5,11 +5,19 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateFactory {
+    Configuration configuration;
+
+    public HibernateFactory(){
+        configuration = new HibernateFactory().getHibernateConfiguration();
+    }
+    public HibernateFactory(Configuration passConfiguration){
+        configuration = passConfiguration;
+    }
 
     private Configuration getHibernateConfiguration() {
-        final Configuration configuration = new Configuration().configure()
+        Configuration standardConfiguration = new Configuration().configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Department.class).addAnnotatedClass(Student.class);
-        return configuration;
+        return standardConfiguration;
     }
 
     public SessionFactory sessionFactory() {
@@ -17,5 +25,4 @@ public class HibernateFactory {
                 .applySettings(getHibernateConfiguration().getProperties());
         return getHibernateConfiguration().buildSessionFactory(registryBuilder.build());
     }
-
 }
