@@ -8,17 +8,26 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class DepartmentDAOTest {
-    Configuration configuration = new Configuration().configure("hibernate-test.cfg.xml")
-            .addAnnotatedClass(Department.class).addAnnotatedClass(Student.class);
+    Configuration configuration = new Configuration()
+            .configure("hibernate-test.cfg.xml")
+            .addAnnotatedClass(Department.class)
+            .addAnnotatedClass(Student.class);
     HibernateFactory hibernateFactory = new HibernateFactory(configuration);
     private final Session session = hibernateFactory.sessionFactory().openSession();
     Department department = new Department();
     DepartmentDAO departmentDAO = new DepartmentDAO();
 
+    @AfterEach
+    public void closeSession() {
+        if (session != null) session.getSessionFactory().close();
+        System.out.println("Session closed\n");
+    }
+
     @Test
     @Order(1)
     void add() {
-        department.setId(1);
+        Integer id = 1;
+        department.setId(id);
         department.setName("Physic");
         department.setColor("White");
 
@@ -30,6 +39,8 @@ class DepartmentDAOTest {
     @Test
     @Order(2)
     void get() {
+        department.setId(1);
+        departmentDAO.add(department,hibernateFactory);
         department = departmentDAO.get(hibernateFactory,1);
         Assertions.assertTrue(department.getId() > 0);
     }
@@ -72,4 +83,5 @@ class DepartmentDAOTest {
         Department deletedDepartment = session.find(Department.class, 1);
         Assertions.assertNull(deletedDepartment);
     }
+
 }
