@@ -1,7 +1,6 @@
 import entity.Department;
 import entity.Student;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.junit.jupiter.api.*;
 
@@ -78,13 +77,21 @@ class DepartmentDAOTest {
 
     @Test
     @Order(5)
-    void delete() { //TODO
+    void delete() {
+        department.setId(id);
+        department.setName("ReadTestName");
+        department.setColor("ReadTestColor");
+        departmentDAO.add(department,hibernateFactory);
+
+        Session session = hibernateFactory.sessionFactory().openSession();
         departmentDAO.delete(hibernateFactory,id);
-        Department deletedDepartment = session.find(Department.class, 1);
+
+        Department deletedDepartment = session.find(Department.class, id);
+
         Assertions.assertNull(deletedDepartment);
     }
     @AfterEach
-    public void closeSession() {
+    public void deleteDataBase() {
         //Delete data from database
         Session session = hibernateFactory.sessionFactory().openSession();
         department.setId(id);

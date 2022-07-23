@@ -41,7 +41,7 @@ public class DepartmentDAO {
         Transaction transaction = session.beginTransaction();
 
         try {
-            Department departmentToDelete = session.find(Department.class,departmentId);
+            Department departmentToDelete = (Department) session.load(Department.class,departmentId);
             if (departmentToDelete != null){
                 session.delete(departmentToDelete);
                 session.getTransaction().commit();
