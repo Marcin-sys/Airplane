@@ -20,8 +20,7 @@ public class DepartmentDAO {
         }
     }
 
-    public void update(Department department,Integer id) {
-        HibernateFactory hibernateFactory = new HibernateFactory();
+    public void update(Department department,HibernateFactory hibernateFactory,Integer id) {
         Session session = hibernateFactory.sessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         department.setId(id);
@@ -37,8 +36,7 @@ public class DepartmentDAO {
         }
     }
 
-    public void delete(Integer departmentId) {
-        HibernateFactory hibernateFactory = new HibernateFactory();
+    public void delete(HibernateFactory hibernateFactory,Integer departmentId) {
         Session session = hibernateFactory.sessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -57,8 +55,7 @@ public class DepartmentDAO {
         }
     }
 
-    public String read(Integer departmentId) {
-        HibernateFactory hibernateFactory = new HibernateFactory();
+    public String read(HibernateFactory hibernateFactory,Integer departmentId) {
         Session session = hibernateFactory.sessionFactory().openSession();
         Department departmentObj;
         String information = null;
@@ -80,8 +77,7 @@ public class DepartmentDAO {
         }return information;
     }
 
-    public Department get(Integer departmentId) {
-        HibernateFactory hibernateFactory = new HibernateFactory();
+    public Department get(HibernateFactory hibernateFactory,Integer departmentId) {
         Session session = hibernateFactory.sessionFactory().openSession();
         Department departmentObj;
         try {

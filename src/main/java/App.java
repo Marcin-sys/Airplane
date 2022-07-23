@@ -24,9 +24,9 @@ public class App {
         department.setColor("black");
 
         studentDAO.update(student);
-        departmentDAO.update(department,3);
+        departmentDAO.update(department,hibernateFactory,3);
 
-        departmentDAO.read(1);
+        departmentDAO.read(hibernateFactory,1);
         studentDAO.read(20);
     }
 }

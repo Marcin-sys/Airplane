@@ -22,7 +22,7 @@ public class HibernateFactory {
 
     public SessionFactory sessionFactory() {
         StandardServiceRegistryBuilder registryBuilder = new StandardServiceRegistryBuilder()
-                .applySettings(getHibernateConfiguration().getProperties());
-        return getHibernateConfiguration().buildSessionFactory(registryBuilder.build());
+                .applySettings(configuration.getProperties());
+        return configuration.buildSessionFactory(registryBuilder.build());
     }
 }
