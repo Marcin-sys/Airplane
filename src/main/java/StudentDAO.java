@@ -49,15 +49,18 @@ public class StudentDAO {
         }
     }
 
-    public void read(HibernateFactory hibernateFactory,Integer studentId) {
+    public String read(HibernateFactory hibernateFactory,Integer studentId) {
         Session session = hibernateFactory.sessionFactory().openSession();
         Student studentObj;
+        String information = null;
 
-        try {
+        try { //TODO
             studentObj = session.get(Student.class, studentId);
             if (studentObj != null) {
-                System.out.println("Student id = " + studentId + " ,student name = " + studentObj.getName() +
-                        " ,student skin = " + studentObj.getSkin() + " ,student department id = "
+                information = ("Student id = " + studentId +
+                        " ,student name = " + studentObj.getName() +
+                        " ,student skin = " + studentObj.getSkin() +
+                        " ,student department id = "
                         + studentObj.getDepartment().getId());
             } else {
                 System.out.println((Object) null);
@@ -67,6 +70,6 @@ public class StudentDAO {
             throw new RuntimeException();
         } finally {
             session.close();
-        }
+        }return information;
     }
 }

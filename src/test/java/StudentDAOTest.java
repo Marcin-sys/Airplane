@@ -16,6 +16,8 @@ class StudentDAOTest {
     private static final Session session = hibernateFactory.sessionFactory().openSession();
     Student student = new Student();
     StudentDAO studentDAO = new StudentDAO();
+    Department department = new Department();
+    DepartmentDAO departmentDAO = new DepartmentDAO();
     Integer id = 1;
 
     @AfterAll
@@ -59,15 +61,38 @@ class StudentDAOTest {
 
     @Test
     @Order(4)
-    void read() {
+    void read() { //TODO
+        department.setId(id);
+        department.setName("Mathematics");
+        departmentDAO.add(department,hibernateFactory);
+
+        student.setId(id);
+        student.setName("ReadTestName");
+        student.setSkin("ReadTestSkin");
+        student.setDepartment(department);
+        studentDAO.update(student, hibernateFactory, id);
+
+        String studentInformation = studentDAO.read(hibernateFactory, id);
+        String result = "Student id = 1 ,student name = " +
+                "ReadTestName ,student skin = ReadTestSkin ," +
+                "student department id = 1";
+
+        assertEquals(result, studentInformation);
     }
 
     @AfterEach
     public void deleteDataBase() {
-//        Session session = hibernateFactory.sessionFactory().openSession();
-//        student.setId(id);
-//        session.beginTransaction();
-//        session.delete(student);
-//        session.getTransaction().commit();
+        Session session = hibernateFactory.sessionFactory().openSession();
+        student.setId(id);
+        session.beginTransaction();
+        session.delete(student);
+        session.getTransaction().commit();
+
+        department.setId(id);
+        session.beginTransaction();
+        if (department != null) {
+            session.delete(department);
+            session.getTransaction().commit();
+        }
     }
 }

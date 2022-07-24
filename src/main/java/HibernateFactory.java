@@ -8,7 +8,7 @@ public class HibernateFactory {
     Configuration configuration;
 
     public HibernateFactory(){
-        configuration = new HibernateFactory().getHibernateConfiguration();
+        configuration = getHibernateConfiguration();
     }
     public HibernateFactory(Configuration passConfiguration){
         configuration = passConfiguration;
