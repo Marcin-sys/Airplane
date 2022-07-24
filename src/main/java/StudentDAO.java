@@ -1,3 +1,4 @@
+import entity.Department;
 import entity.Student;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -34,12 +35,16 @@ public class StudentDAO {
         }
     }
 
-    public void delete(Student student,HibernateFactory hibernateFactory) {
+    public void delete(HibernateFactory hibernateFactory, Integer studentId) {
         Session session = hibernateFactory.sessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         try {
-            session.delete(student);
-            session.getTransaction().commit();
+            Student studentToDelete = (Student) session.get(Student.class,studentId);
+            System.out.println(studentToDelete);
+            if(studentToDelete !=null) {
+                session.delete(studentToDelete);
+                session.getTransaction().commit();
+            }
         } catch (Exception ex) {
             transaction.rollback();
             ex.printStackTrace();
@@ -54,7 +59,7 @@ public class StudentDAO {
         Student studentObj;
         String information = null;
 
-        try { //TODO
+        try {
             studentObj = session.get(Student.class, studentId);
             if (studentObj != null) {
                 information = ("Student id = " + studentId +

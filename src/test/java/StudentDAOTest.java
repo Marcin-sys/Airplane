@@ -57,6 +57,25 @@ class StudentDAOTest {
     @Test
     @Order(3)
     void delete() {
+        department.setId(id);
+        department.setName("Mathematics");
+        departmentDAO.add(department,hibernateFactory);
+
+        student.setId(id);
+        student.setName("ReadTestName");
+        student.setSkin("ReadTestSkin");
+        student.setDepartment(department);
+        studentDAO.update(student, hibernateFactory, id);
+
+        Session session = hibernateFactory.sessionFactory().openSession();
+
+        studentDAO.delete(hibernateFactory,id);
+
+        Student deletedStudent = session.find(Student.class, id);
+
+        Assertions.assertNull(deletedStudent);
+
+
     }
 
     @Test
@@ -81,7 +100,7 @@ class StudentDAOTest {
     }
 
     @AfterEach
-    public void deleteDataBase() {
+    public void deleteTestDataBase() {
         Session session = hibernateFactory.sessionFactory().openSession();
         student.setId(id);
         session.beginTransaction();

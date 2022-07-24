@@ -79,8 +79,8 @@ class DepartmentDAOTest {
     @Order(5)
     void delete() {
         department.setId(id);
-        department.setName("ReadTestName");
-        department.setColor("ReadTestColor");
+        department.setName("DeleteTestName");
+        department.setColor("DeleteTestColor");
         departmentDAO.add(department, hibernateFactory);
 
         Session session = hibernateFactory.sessionFactory().openSession();
@@ -92,12 +92,13 @@ class DepartmentDAOTest {
     }
 
     @AfterEach
-    public void deleteDataBase() {
+    public void deleteTestDataBase() {
         Session session = hibernateFactory.sessionFactory().openSession();
         department.setId(id);
         session.beginTransaction();
-        session.delete(department);
-        session.getTransaction().commit();
-
+        if (department != null) {
+            session.delete(department);
+            session.getTransaction().commit();
+        }
     }
 }
