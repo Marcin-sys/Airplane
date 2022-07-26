@@ -80,7 +80,7 @@ class StudentDAOTest {
 
     @Test
     @Order(4)
-    void read() { //TODO
+    void read() {
         department.setId(id);
         department.setName("Mathematics");
         departmentDAO.add(department,hibernateFactory);
@@ -104,13 +104,13 @@ class StudentDAOTest {
         Session session = hibernateFactory.sessionFactory().openSession();
         student.setId(id);
         session.beginTransaction();
-        session.delete(student);
+        session.remove(student);
         session.getTransaction().commit();
 
         department.setId(id);
         session.beginTransaction();
         if (department != null) {
-            session.delete(department);
+            session.remove(department);
             session.getTransaction().commit();
         }
     }

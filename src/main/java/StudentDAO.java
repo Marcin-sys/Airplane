@@ -1,4 +1,3 @@
-import entity.Department;
 import entity.Student;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -8,7 +7,7 @@ public class StudentDAO {
         Session session = hibernateFactory.sessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         try {
-            session.save(student);
+            session.persist(student);
             session.getTransaction().commit();
         } catch (Exception ex) {
             transaction.rollback();
@@ -42,7 +41,7 @@ public class StudentDAO {
             Student studentToDelete = (Student) session.get(Student.class,studentId);
             System.out.println(studentToDelete);
             if(studentToDelete !=null) {
-                session.delete(studentToDelete);
+                session.remove(studentToDelete);
                 session.getTransaction().commit();
             }
         } catch (Exception ex) {

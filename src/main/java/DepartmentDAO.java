@@ -9,7 +9,7 @@ public class DepartmentDAO {
         Transaction transaction = session.beginTransaction();
 
         try {
-            session.save(department);
+            session.persist(department);
             session.getTransaction().commit();
         } catch (Exception ex) {
             transaction.rollback();
@@ -43,7 +43,7 @@ public class DepartmentDAO {
         try {
             Department departmentToDelete = (Department) session.load(Department.class,departmentId);
             if (departmentToDelete != null){
-                session.delete(departmentToDelete);
+                session.remove(departmentToDelete);
                 session.getTransaction().commit();
             }
         } catch (Exception ex) {

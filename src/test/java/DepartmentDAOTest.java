@@ -97,7 +97,7 @@ class DepartmentDAOTest {
         department.setId(id);
         session.beginTransaction();
         if (department != null) {
-            session.delete(department);
+            session.remove(department);
             session.getTransaction().commit();
         }
     }
